@@ -1,9 +1,12 @@
-import 'package:ecommerce_app/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeButton extends StatelessWidget {
-  const WelcomeButton({super.key, required this.buttunText});
-  final String buttunText;
+  const WelcomeButton(
+      {super.key, this.buttonText, this.onTap, this.color, this.textColor});
+  final String? buttonText;
+  final Widget? onTap;
+  final Color? color;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -12,22 +15,28 @@ class WelcomeButton extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (e) => SignupScreen(),
+            builder: (e) => onTap!,
           ),
         );
       },
       child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(50)),
+        padding: const EdgeInsets.all(30.0),
+        decoration: BoxDecoration(
+          color: color!,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50),
           ),
-          child: Text(
-            buttunText,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          )),
+        ),
+        child: Text(
+          buttonText!,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: textColor!,
+          ),
+        ),
+      ),
     );
   }
 }
